@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typing Test</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body data-theme="light">
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <img src="images/logo.gif" alt="">
+            <a href="index.html">English Typing Test</a>
+            <a href="hindi.html">Hindi Typing Test</a>
+            <a href="mangal-index.html">Mangal Typing Test</a>
+
+            <!-- Typing Test Game Dropdown -->
+            <div class="dropdown">
+                <a class="">Typing Test Game</a>
+                <div class="dropdown-content">
+                    <a href="englishgame.html">English Typing Game</a>
+                    <a href="hindigame.html">Hindi Typing Game</a>
+
+                    <!-- Sub Dropdown for Difficulty Levels -->
+                    <!-- <div class="sub-dropdown">
+                        <button class="sub-dropbtn">Choose Difficulty</button>
+                        <div class="sub-dropdown-content">
+                            <a href="game-easy.html">Easy</a>
+                            <a href="game-medium.html">Medium</a>
+                            <a href="game-hard.html">Hard</a>
+                        </div>
+                    </div> -->
+
+
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <h1>Check your English typing skills in a minute</h1>
+            <p>Type away to join 150+ million test takers!</p>
+
+            <div class="test-options">
+                <select>
+                    <option>1 Minute Test</option>
+                    <option>3 Minute Test</option>
+                    <option>5 Minute Test</option>
+                </select>
+
+                <select>
+                    <option>Easy Text</option>
+                    <option>Medium Text</option>
+                    <option>Hard Text</option>
+                </select>
+            </div>
+            <a href="english.html">
+                <button class="start-test-button">Go For Test</button>
+            </a>
+
+            <div class="hin-img">
+                <img src="images/eng.png" alt="">
+            </div>
+
+            <div class="dark-mode-toggle">
+                <label for="dark-mode">Dark Mode</label>
+                <input type="checkbox" id="dark-mode">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Dark mode toggle functionality
+        const darkModeToggle = document.getElementById("dark-mode");
+        const body = document.body;
+
+        darkModeToggle.addEventListener("change", () => {
+            if (darkModeToggle.checked) {
+                body.setAttribute("data-theme", "dark");
+            } else {
+                body.setAttribute("data-theme", "light");
+            }
+        });
+    </script>
+</body>
+
+</html>

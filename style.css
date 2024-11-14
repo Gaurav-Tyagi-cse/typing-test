@@ -1,0 +1,247 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body[data-theme="light"] {
+  --bg-color: #e6f4f7;
+  --container-bg: #f0f8fa;
+  --sidebar-bg: #2a7f9b;
+  --text-color: #e3ebee;
+  --button-bg: #2a7f9b;
+  --button-hover: #225f73;
+  --dark-mode-toggle-color: #555;
+}
+
+body[data-theme="dark"] {
+  --bg-color: #2b2b2b;
+  --container-bg: #3c3c3c;
+  --sidebar-bg: #1f1f1f;
+  --text-color: #f0f0f0;
+  --button-bg: #4c9cbb;
+  --button-hover: #3c7f99;
+  --dark-mode-toggle-color: #ccc;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: var(--bg-color);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.light {
+  width: 100%;
+}
+
+.container {
+  display: flex;
+  width: 90%;
+  /* max-width: 1200px; */
+  background: var(--container-bg);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s;
+}
+
+/* Sidebar */
+.sidebar {
+  background-color: var(--sidebar-bg);
+  color: #ffffff;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.sidebar a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 1.1em;
+  padding: 10px 0;
+}
+
+/* Main Content */
+.main-content {
+  background-color: white;
+  flex: 2;
+  padding: 20px;
+  text-align: center;
+  position: relative;
+  color: var(--text-color);
+  box-shadow: -30px;
+  transition: color 0.3s;
+}
+
+.main-content h1 {
+  font-size: 1.8em;
+  margin-bottom: 10px;
+}
+
+.main-content p {
+  margin-bottom: 30px;
+}
+
+.test-options {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.test-options select {
+  padding: 10px;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  color: #333;
+}
+
+.start-test-button {
+  padding: 12px 24px;
+  background-color: var(--button-bg);
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s;
+}
+
+.start-test-button:hover {
+  background-color: var(--button-hover);
+}
+
+.dark-mode-toggle {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--dark-mode-toggle-color);
+  transition: color 0.3s;
+}
+
+.dark-mode-toggle input[type="checkbox"] {
+  transform: scale(1.2);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .main-content {
+    padding: 20px 10px;
+  }
+
+  .sidebar {
+    align-items: center;
+  }
+}
+
+.hin-img {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.hin-img img {
+  width: 100%;
+}
+
+/* Dropdown Button */
+.dropdown {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.dropdown .dropbtn {
+  background-color: #4caf50;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #3e8e41;
+}
+
+/* Dropdown Content (hidden by default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  /* background-color: #f9f9f9; */
+  color: white;
+  min-width: 160px;
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: white;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Show the dropdown content when hovering */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Sub Dropdown */
+.sub-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.sub-dropdown .sub-dropbtn {
+  /* background-color: #f1f1f1; */
+  color: white;
+  padding: 12px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+.sub-dropdown .sub-dropdown-content {
+  display: none;
+  position: absolute;
+  /* background-color: #f9f9f9; */
+  min-width: 160px;
+  z-index: 1;
+  top: 100%;
+  left: 0;
+}
+
+.sub-dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* .sub-dropdown-content a:hover {
+  background-color: #f1f1f1;
+} */
+
+/* Show the sub-dropdown content when hovering */
+.sub-dropdown:hover .sub-dropdown-content {
+  display: block;
+}
+
+/* .sub-dropdown:hover .sub-dropbtn {
+  background-color: #ddd;
+} */

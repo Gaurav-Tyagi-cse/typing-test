@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typing Test</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .baloonbody{
+            height: 100vh;
+            width: 60vw;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        .balloon {
+            position: absolute;
+            display: inline-block;
+            padding: 20px;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; /* गुब्बारे का आकार */
+            background: linear-gradient(60deg, #80184c, #c6387f); /* गुलाबी रंग */
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            animation: float 5s ease-in-out infinite;
+            cursor: pointer;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease;
+        }
+        .string {
+            position: absolute;
+            width: 2px;
+            height: 40px;
+            background-color: #FF69B4;
+            left: 50%;
+            top: 100%;
+            transform: translateX(-50%);
+        }
+        @keyframes float {
+            0% {
+                transform: translateY(100vh);
+                opacity: 1;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh);
+                opacity: 0;
+            }
+        }
+        /* फूटने का एनिमेशन */
+        .pop {
+            animation: pop 0.3s forwards;
+        }
+        @keyframes pop {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(0);
+                opacity: 0;
+            }
+        }
+        /* स्टार का आकार और एनिमेशन */
+        .star {
+            position: absolute;
+            font-size: 30px;
+            color: gold;
+            animation: starAnimation 1s forwards;
+            z-index: 10;
+        }
+
+        @keyframes starAnimation {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body data-theme="light">
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <img src="images/logo.gif" alt="">
+            <a href="index.html">English Typing Test</a>
+            <a href="hindi.html">Hindi Typing Test</a>
+            <a href="mangal-index.html">Mangal Typing Test</a>
+
+            <!-- Typing Test Game Dropdown -->
+            <div class="dropdown">
+                <a class="">Typing Test Game</a>
+                <div class="dropdown-content">
+                    <a href="englishgame.html">English Typing Game</a>
+                    <a href="hindigame.html">Hindi Typing Game</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content baloonbody" style="background-image: url(images/backimg.jpeg);">
+            <div id="balloon-container"></div>
+        </div>
+    </div>
+
+    <script>
+        // अक्षरों का सेट (A-Z)
+        const letters = "कखगघङचछजझञटठडढणतथदधनपफबभमयरलवशषसहक्षत्रज्ञश्रअआइईउऊॠएऐओऔअंअः";
+
+        function createBalloon() {
+            // रैंडम अक्षर चुने
+            const randomLetter = letters[Math.floor(Math.random() * letters.length)];
+
+            // गुब्बारा बनाएँ
+            const balloon = document.createElement('div');
+            balloon.classList.add('balloon');
+            balloon.innerText = randomLetter;
+            balloon.style.left = Math.random() * window.innerWidth + 'px';
+            
+            // गुब्बारे की डोरी बनाएँ
+            const string = document.createElement('div');
+            string.classList.add('string');
+            balloon.appendChild(string);
+
+            // गुब्बारे को container में जोड़ें
+            document.getElementById('balloon-container').appendChild(balloon);
+
+            // 5 सेकंड बाद गुब्बारा अपने आप हट जाए
+            setTimeout(() => {
+                if (document.body.contains(balloon)) balloon.remove();
+            }, 5000);
+        }
+
+        // हर 1 सेकंड में नया गुब्बारा बनाए
+        setInterval(createBalloon, 1000);
+
+        // कीबोर्ड इवेंट लिसनर
+        document.addEventListener('keydown', (event) => {
+            const pressedKey = event.key.toUpperCase();
+            const balloonsOnScreen = document.querySelectorAll('.balloon');
+
+            balloonsOnScreen.forEach(balloon => {
+                if (balloon.innerText === pressedKey) {
+                    // गुब्बारा फूटने का इफेक्ट
+                    balloon.classList.add('pop');
+
+                    // Create a star element at the position of the balloon
+                    const star = document.createElement('div');
+                    star.classList.add('star');
+                    star.innerText = '⭐';
+
+                    // Position the star at the balloon's location
+                    const balloonRect = balloon.getBoundingClientRect();
+                    star.style.left = balloonRect.left + balloonRect.width / 2 - 15 + 'px';
+                    star.style.top = balloonRect.top + balloonRect.height / 2 - 15 + 'px';
+
+                    // Add the star to the container
+                    document.body.appendChild(star);
+
+                    // Remove the star after 1 second
+                    setTimeout(() => {
+                        star.remove();
+                    }, 1000);
+
+                    // Remove the popped balloon after the animation
+                    setTimeout(() => {
+                        balloon.remove();
+                    }, 300); // फूटने का एनिमेशन खत्म होने के बाद हटाना
+                }
+            });
+        });
+    </script>
+
+    <script>
+        // Dark mode toggle functionality
+        const darkModeToggle = document.getElementById("dark-mode");
+        const body = document.body;
+
+        darkModeToggle.addEventListener("change", () => {
+            if (darkModeToggle.checked) {
+                body.setAttribute("data-theme", "dark");
+            } else {
+                body.setAttribute("data-theme", "light");
+            }
+        });
+    </script>
+</body>
+
+</html>

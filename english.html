@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Typing Test</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f0f0f0;
+        }
+
+        .brii {
+            font-family: 'Noto Sans Devanagari', sans-serif;
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            font-size: 50px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 100px;
+            margin-top: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #results {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .correct {
+            color: green;
+        }
+
+        .incorrect {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="brii">
+        <div style="display: flex;">
+            <h1>English Typing Test</h1>
+            <button onclick="location.href='index.html'"
+                style="width: 170px; height: 40px; margin-left: 30px; margin-top: 40px;">Main Menu</button>
+        </div>
+        <p id="textToTypeEnglish"></p>
+        <textarea id="userInputEnglish" placeholder="Start typing here..." oninput="checkText()"></textarea>
+        <div style="display: flex;">
+            <button id="startBtnEnglish">Start Test</button> &nbsp; &nbsp;
+            <button id="stopBtnEnglish" disabled>Submit Test</button>
+        </div>
+        <div id="resultsEnglish">
+            <h2>Results</h2>
+            <p id="accuracyEnglish"></p>
+            <p id="speedEnglish"></p>
+        </div>
+    </div>
+
+    <script>
+        const predefinedTextEnglish = "Asking for help is not a sign of weakness but rather a smart strategy for academic success. Most educational institutions offer a variety of resources and support systems to help students succeed. This can include tutoring services, academic advising, counseling, and writing centers. Professors and teaching assistants are also valuable resources who can provide guidance and clarification on course material. Don't hesitate to reach out if you're struggling with a particular concept or assignment. Seeking help early on can prevent small problems from snowballing into larger issues.";
+        let startTime, endTime;
+
+        document.getElementById('textToTypeEnglish').innerText = predefinedTextEnglish;
+
+        function startTypingTest() {
+            startTime = new Date();
+            document.getElementById('userInputEnglish').focus();
+            document.getElementById('resultsEnglish').style.display = 'none';
+            document.getElementById('stopBtnEnglish').disabled = false;
+        }
+
+        function stopTypingTest() {
+            endTime = new Date();
+            const userInput = document.getElementById('userInputEnglish').value;
+            const totalWords = predefinedTextEnglish.split(' ').length;
+            const correctWords = userInput.split(' ').filter((word, index) => word === predefinedTextEnglish.split(' ')[index]).length;
+            const accuracy = (correctWords / totalWords) * 100;
+            const timeTaken = (endTime - startTime) / 1000; // time in seconds
+            const typingSpeed = (userInput.split(' ').length / timeTaken) * 60; // words per minute
+
+            document.getElementById('accuracyEnglish').innerText = `Accuracy: ${accuracy.toFixed(2)}%`;
+            document.getElementById('speedEnglish').innerText = `Speed: ${typingSpeed.toFixed(2)} WPM`;
+            document.getElementById('resultsEnglish').style.display = 'block';
+            document.getElementById('stopBtnEnglish').disabled = true;
+        }
+
+        function checkText() {
+            const userInput = document.getElementById('userInputEnglish').value;
+            const userWords = userInput.split(' ');
+            const predefinedWords = predefinedTextEnglish.split(' ');
+
+            let highlightedText = '';
+
+            for (let i = 0; i < predefinedWords.length; i++) {
+                if (userWords[i] === predefinedWords[i]) {
+                    highlightedText += `<span class="correct">${predefinedWords[i]}</span> `;
+                } else if (userWords[i]) {
+                    highlightedText += `<span class="incorrect">${userWords[i]}</span> `;
+                } else {
+                    highlightedText += `<span>${predefinedWords[i]}</span> `;
+                }
+            }
+
+            document.getElementById('textToTypeEnglish').innerHTML = highlightedText;
+        }
+
+        document.getElementById('startBtnEnglish').addEventListener('click', startTypingTest);
+        document.getElementById('stopBtnEnglish').addEventListener('click', stopTypingTest);
+    </script>
+</body>
+
+</html>

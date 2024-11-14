@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>मंगल फॉन्ट टाइपिंग टेस्ट</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f0f0f0;
+        }
+
+        .brii {
+            font-family: 'Noto Sans Devanagari', sans-serif;
+            width: 80%;
+            margin: 30px auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            font-size: 50px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 100px;
+            margin-top: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #results {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .correct {
+            color: green;
+        }
+
+        .incorrect {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="brii">
+        <div style="display: flex;">
+            <h1>मंगल फॉन्ट टाइपिंग टेस्ट</h1>
+            <button onclick="location.href='index.html'"
+                style="width: 170px; height: 40px; margin-left: 30px; margin-top: 40px;">Main Menu</button>
+        </div>
+        <p id="textToTypeMangal"></p>
+
+        <textarea id="userInputMangal" placeholder="यहाँ टाइप करें..." oninput="checkText()"></textarea>
+        <div style="display: flex;">
+            <button id="startBtnMangal">Start Test</button> &nbsp; &nbsp;
+            <button id="stopBtnMangal" disabled>Submit Test</button>
+        </div>
+        <div id="resultsMangal">
+            <h2>परिणाम</h2>
+            <p id="accuracyMangal"></p>
+            <p id="speedMangal"></p>
+        </div>
+    </div>
+
+
+    <script>
+        const predefinedTextMangal = "मदद मांगना कमजोरी की निशानी नहीं है, बल्कि अकादमिक सफलता के लिए एक स्मार्ट रणनीति है। अधिकांश शैक्षणिक संस्थान छात्रों को सफल होने में मदद करने के लिए कई तरह के संसाधन और सहायता प्रणाली प्रदान करते हैं। इसमें ट्यूशन सेवाएँ, अकादमिक सलाह, परामर्श और लेखन केंद्र शामिल हो सकते हैं। प्रोफेसर और शिक्षण सहायक भी मूल्यवान संसाधन हैं जो पाठ्यक्रम सामग्री पर मार्गदर्शन और स्पष्टीकरण प्रदान कर सकते हैं। यदि आप किसी विशेष अवधारणा या असाइनमेंट से जूझ रहे हैं, तो संपर्क करने में संकोच न करें। शुरुआत में ही मदद माँगने से छोटी समस्याओं को बड़े मुद्दों में बदलने से रोका जा सकता है।";
+        let startTime, endTime;
+
+        document.getElementById('textToTypeMangal').innerText = predefinedTextMangal;
+
+        function startTypingTest() {
+            startTime = new Date();
+            document.getElementById('userInputMangal').focus();
+            document.getElementById('resultsMangal').style.display = 'none';
+            document.getElementById('stopBtnMangal').disabled = false;
+        }
+
+        function stopTypingTest() {
+            endTime = new Date();
+            const userInput = document.getElementById('userInputMangal').value;
+            const totalWords = predefinedTextMangal.split(' ').length;
+            const correctWords = userInput.split(' ').filter((word, index) => word === predefinedTextMangal.split(' ')[index]).length;
+            const accuracy = (correctWords / totalWords) * 100;
+            const timeTaken = (endTime - startTime) / 1000; // time in seconds
+            const typingSpeed = (userInput.split(' ').length / timeTaken) * 60; // words per minute
+
+            document.getElementById('accuracyMangal').innerText = `Accuracy: ${accuracy.toFixed(2)}%`;
+            document.getElementById('speedMangal').innerText = `Speed: ${typingSpeed.toFixed(2)} WPM`;
+            document.getElementById('resultsMangal').style.display = 'block';
+            document.getElementById('stopBtnMangal').disabled = true;
+        }
+
+        function checkText() {
+            const userInput = document.getElementById('userInputMangal').value;
+            const userWords = userInput.split(' ');
+            const predefinedWords = predefinedTextMangal.split(' ');
+
+            let highlightedText = '';
+
+            for (let i = 0; i < predefinedWords.length; i++) {
+                if (userWords[i] === predefinedWords[i]) {
+                    highlightedText += `<span class="correct">${predefinedWords[i]}</span> `;
+                } else if (userWords[i]) {
+                    highlightedText += `<span class="incorrect">${userWords[i]}</span> `;
+                } else {
+                    highlightedText += `<span>${predefinedWords[i]}</span> `;
+                }
+            }
+
+            document.getElementById('textToTypeMangal').innerHTML = highlightedText;
+        }
+
+        document.getElementById('startBtnMangal').addEventListener('click', startTypingTest);
+        document.getElementById('stopBtnMangal').addEventListener('click', stopTypingTest);
+    </script>
+</body>
+
+</html>

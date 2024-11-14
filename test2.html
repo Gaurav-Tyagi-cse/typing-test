@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typing Test</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body[data-theme="light"] {
+            --bg-color: #e6f4f7;
+            --container-bg: #f0f8fa;
+            --sidebar-bg: #2a7f9b;
+            --text-color: #2a7f9b;
+            --button-bg: #2a7f9b;
+            --button-hover: #225f73;
+            --dark-mode-toggle-color: #555;
+        }
+
+        body[data-theme="dark"] {
+            --bg-color: #2b2b2b;
+            --container-bg: #3c3c3c;
+            --sidebar-bg: #1f1f1f;
+            --text-color: #f0f0f0;
+            --button-bg: #4c9cbb;
+            --button-hover: #3c7f99;
+            --dark-mode-toggle-color: #ccc;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: var(--bg-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .light {
+            width: 100%;
+        }
+
+        .container {
+            display: flex;
+            width: 90%;
+            /* max-width: 1200px; */
+            background: var(--container-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
+        }
+
+        /* Sidebar */
+        .sidebar {
+
+            background-color: var(--sidebar-bg);
+            color: #ffffff;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .sidebar a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.1em;
+            padding: 10px 0;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 2;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            color: var(--text-color);
+            transition: color 0.3s;
+
+
+        }
+
+        .main-content h1 {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+
+        .main-content p {
+            margin-bottom: 30px;
+        }
+
+        .test-options {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .test-options select {
+            padding: 10px;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            color: #333;
+        }
+
+        .start-test-button {
+            padding: 12px 24px;
+            background-color: var(--button-bg);
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+
+        .start-test-button:hover {
+            background-color: var(--button-hover);
+        }
+
+        .dark-mode-toggle {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: var(--dark-mode-toggle-color);
+            transition: color 0.3s;
+        }
+
+        .dark-mode-toggle input[type="checkbox"] {
+            transform: scale(1.2);
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .main-content {
+                padding: 20px 10px;
+            }
+
+            .sidebar {
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+
+<body data-theme="light">
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <a href="#">Typing Test</a>
+            <a href="#">Typing Practice</a>
+            <a href="#">Typing Lessons</a>
+            <a href="#">Tricky Keys</a>
+            <a href="#">Typing Benchmark</a>
+            <a href="#">Typing Certification</a>
+            <a href="#">Bigram Blitz</a>
+            <a href="#">Typing Games</a>
+            <a href="#">Typing Challenge</a>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <h1>Check your typing skills in a minute</h1>
+            <p>Type away to join 150+ million test takers!</p>
+
+            <div class="test-options">
+                <select>
+                    <option>1 Minute Test</option>
+                    <option>3 Minute Test</option>
+                    <option>5 Minute Test</option>
+                </select>
+
+                <select>
+                    <option>Easy Text</option>
+                    <option>Medium Text</option>
+                    <option>Hard Text</option>
+                </select>
+            </div>
+
+            <button class="start-test-button">Start Test</button>
+
+            <div class="dark-mode-toggle">
+                <label for="dark-mode">Dark Mode</label>
+                <input type="checkbox" id="dark-mode">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Dark mode toggle functionality
+        const darkModeToggle = document.getElementById("dark-mode");
+        const body = document.body;
+
+        darkModeToggle.addEventListener("change", () => {
+            if (darkModeToggle.checked) {
+                body.setAttribute("data-theme", "dark");
+            } else {
+                body.setAttribute("data-theme", "light");
+            }
+        });
+    </script>
+</body>
+
+</html>
